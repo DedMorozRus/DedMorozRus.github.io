@@ -1,0 +1,114 @@
+:root {
+    font-size: calc(0.5em + 0.5vmax);
+}
+
+body {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(-45deg, #00c9ff, #92fe9d);
+    color: rgb(2, 13, 63);
+    overflow: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+img {
+    width: 100%;
+}
+
+.santa {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    width: 60%;
+}
+
+.speech {
+    position: absolute;
+    width: 70%;
+    top: 5vmin;
+    right: 5vmin;
+    height: 45%;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 75%, 25% 100%, 25% 75%, 0% 75%);
+    background: rgba(255, 255, 255, 0.75);
+    font-size: 2rem;
+    padding: 0.5em 1em;
+    padding-bottom: 2em;
+    color: #000;
+    font-family: 'Caveat', cursive;
+    z-index: 1;
+}
+
+.typed {
+    white-space: pre-wrap;
+}
+
+.snow {
+    position: absolute;
+    top: -100vh;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+$s1: "";
+$s2: "";
+@for $i from 1 through 400 {
+    $s1: $s1 + random(1000)*0.1vw + " " + random(1000)*0.1vh + " " + 0 + " " + random(50)*-0.01rem + #fff;
+    $s2: $s2 + random(1000)*0.1vw + " " + random(1000)*0.1vh + " " + 0 + " " + random(50)*-0.01rem + #fff;
+    @if $i < 400 {
+        $s1: $s1 + ",";
+        $s2: $s2 + ",";
+    }
+}
+
+.layer1 {
+    width: 1.5rem;
+    height: 1.5rem;
+    filter: blur(1.5px);
+    box-shadow: #{$s1};
+    animation-duration: 6s;
+}
+
+.layer1.a {
+    animation-delay: 3s;
+}
+
+.layer2 {
+    width: 1.2rem;
+    height: 1.2rem;
+    filter: blur(3px);
+    box-shadow: #{$s2};
+    animation-duration: 8s;
+    z-index: -1;
+}
+
+.layer2.a {
+    animation-delay: 4s;
+}
+
+@keyframes fall {
+    100% {
+        transform: translateY(200vh);
+    }
+}
+
+@media (orientation: landscape) {
+    .santa {
+        width: 40%;
+        left: 0;
+    }
+
+    .speech {
+        width: 65%;
+    }
+}
+
